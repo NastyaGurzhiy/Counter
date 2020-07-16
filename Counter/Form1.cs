@@ -16,5 +16,10 @@ namespace Counter
         {
             InitializeComponent();
         }
+
+        private void etsmiExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
