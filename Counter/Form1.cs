@@ -19,11 +19,6 @@ namespace Counter
             InitializeComponent();
         }
 
-        private void tsmiExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void tsmiAboutProg_Click(object sender, EventArgs e)
         {
             MessageBox.Show("My program\nNastya G.\t16.07.20", "About program");
@@ -47,19 +42,20 @@ namespace Counter
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            fBrD1.ShowDialog();
-            try
+            if (fBrD1.ShowDialog(this) == DialogResult.OK)
             {
-                StreamWriter stream = File.AppendText(fBrD1.SelectedPath + @"\.txt");
-                stream.WriteLine(count);
-                stream.Close();
-                MessageBox.Show("Successfully!");
+                try
+                {
+                    StreamWriter stream = File.AppendText(fBrD1.SelectedPath + @"\.txt");
+                    stream.WriteLine(count);
+                    stream.Close();
+                    MessageBox.Show("Successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Failed");
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Failed");
-            }
-            fBrD1.SelectedPath = null;
         }
     }
 }
